@@ -12,13 +12,17 @@
       <h1 class="center">Aston Book Store</h1>
       <h2 class="center">Register</h2>
       <form method="post" action="login.php">
-        <input type="text" name="username" placeholder="Username" autofocus>
-        <input type="text" name="name" placeholder="Full Name" autofocus>
-        <input type="text" name="email" placeholder="Email Address" autofocus>
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="validate_password" placeholder="Password">
         <div class="center">
-          <input type="submit" value="Register">
+          <div>
+            <input type="text" name="username" placeholder="Username" autofocus class="center">
+            <input type="text" name="name" placeholder="Full Name" class="center">
+            <input type="text" name="email" placeholder="Email Address" class="center">
+            <input type="password" name="password" placeholder="Password" class="center">
+            <input type="password" name="validate_password" placeholder="Password" class="center">
+            <div class="center">
+              <input type="submit" value="Register" >
+            </div>
+          </div>
         </div>
       </form>
     </div>
