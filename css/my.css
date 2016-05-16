@@ -1,9 +1,8 @@
 .center{
-  text-align:center;
-  float:center;
-  display:block;
-  margin:0 auto;
-  width:20em;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align: center;
 }​
 
 ::-webkit-input-placeholder {

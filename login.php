@@ -7,8 +7,10 @@
 </head>
 <body>
   <div class="center">
-    <h1 >Aston Book Store</h1>
-    <h2 >Logging in...</h2>
+    <div>
+      <h1 >Aston Book Store</h1>
+      <h2 >Logging in...</h2>
+    </div>
   </div>
 </body>
 </html>
