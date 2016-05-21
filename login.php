@@ -12,7 +12,7 @@
       <h2 class="center">Login</h2>
       <div class="center">
         <div>
-          <?php include 'php/validateLogin.php' ?>
+          <?php include 'php/ValidateLogin.php' ?>
           <form method="post" action="login.php">
             <input type="text" name="username" placeholder="Username" value="<?php echo $username;?>" autofocus class="center">
             <input type="password" name="password" placeholder="Password" class="center">

@@ -4,7 +4,7 @@
   The script then connects to the database and attempts to login.
   */
 
-include 'initDb.php';
+include 'InitDb.php';
 
 $username = htmlspecialchars($_POST['username']);
 $password = $_POST['password'];
@@ -31,7 +31,9 @@ if($_POST['operation'] == 'login'){
     $dbusername = $db->quote($username);
 
     try{
-      $rows = $db->query("SELECT username, password FROM user WHERE username = $dbusername");
+      //Retrieve all the users details now as they will be stored
+      //in the session variable if the login is successful.
+      $rows = $db->query("SELECT username, password, type, balance, email, name FROM user WHERE username = $dbusername");
       if($rows->rowCount() == 0){
         echo '<div class="center">Username not found.</div>';
       } else {
@@ -40,7 +42,13 @@ if($_POST['operation'] == 'login'){
         if(password_verify($password, $user['password'])){
           //Successfully logged in.
           //Write the session variables and then redirect to index.
-          
+          session_start();
+          $_SESSION['username'] = $user['username'];
+          $_SESSION['type'] = $user['type'];
+          $_SESSION['balance'] = $user['balance'];
+          $_SESSION['email'] = $user['email'];
+          $_SESSION['fullname'] = $user['name'];
+
           header('Location: index.php');
         } else {
           echo '<div class="center">Incorrect password.</div>';

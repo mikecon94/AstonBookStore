@@ -4,7 +4,7 @@
   The data is then sent to the database to create a new user.
   */
 
-include 'initDb.php';
+include 'InitDb.php';
 
 $username = htmlspecialchars($_POST['username']);
 $name = htmlspecialchars($_POST['name']);

@@ -8,8 +8,9 @@
 </head>
 <body>
   <?php
-    //Check if user is logged in or just clicked login.
-    if($_SESSION['loggedin'] == true){
+    session_start();
+    //Check if a user is logged in otherwise redirect to login page.
+    if(!isset($_SESSION['username'])){
       header('location: login.php');
     }
 
@@ -17,7 +18,7 @@
   <div class="center">
     <div>
       <h1 >Aston Book Store</h1>
-      <h2 >Welcome</h2>
+      <h2 class="center">Welcome <?php echo $_SESSION['fullname'];?> </h2>
     </div>
   </div>
 </body>
