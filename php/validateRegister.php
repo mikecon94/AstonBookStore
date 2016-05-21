@@ -1,7 +1,8 @@
 <?php
-/* This script will be used to validate the data posted to the register form.
-  It will "cleanse" the data of illegal chars and validate the required fields
-  have been passed.*/
+/*This script cleanses the data of illegal chars and validates
+  the required fields have been passed and in a valid format.
+  The data is then sent to the database to create a new user.
+  */
 
 include 'initDb.php';
 
@@ -16,6 +17,7 @@ $password2 = htmlspecialchars($_POST['password2']);
   register.*/
 if($_POST['operation'] == 'register'){
 
+  //If this is true at the end then we don't attempt to insert the users data.
   $errors = false;
   //Basic validation eg. empty etc.
   //Check username is unique.
@@ -63,10 +65,12 @@ if($_POST['operation'] == 'register'){
       } else {
         $db->exec("INSERT INTO user (username, password, balance, email, name)
                   VALUES ($dbusername, $dbhash, 0, $dbemail, $dbname)");
+        //Redirect to the login page on successful registration.
         header('location:login.php');
       }
     } catch (PDOException $e){
       echo '<div class="center">Database error, please try again.</div>';
+      error_log('Database Error: ' . $e);
     }
   }
 }
