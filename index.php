@@ -7,10 +7,17 @@
   <link rel="stylesheet" type="text/css" href="css/my.css?v=<?=time();?>">
 </head>
 <body>
+  <?php
+    //Check if user is logged in or just clicked login.
+    if($_SESSION['loggedin'] == true){
+      header('location: login.php');
+    }
+
+   ?>
   <div class="center">
     <div>
       <h1 >Aston Book Store</h1>
-      <h2 >Logging in...</h2>
+      <h2 >Welcome</h2>
     </div>
   </div>
 </body>
