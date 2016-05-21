@@ -45,14 +45,29 @@ if($_POST['operation'] == 'register'){
     $errors=true;
   }
 
-
-  //If all validation passes, register the user (send to database)
-  //$db->quote
-  //Catch errors eg. duplicate username
-  //throw them back to user.
   if(!$errors){
-    echo "No validation errors. Attempting to insert to database.";
+    //Create new variables that are safe for inserting into the db
+    //Old variables aren't reused as they could get output
+    //In the sticky form.
+    $dbusername = $db->quote($username);
+    $dbname = $db->quote($name);
+    $dbemail = $db->quote($email);
+    $dbhash = password_hash($password, PASSWORD_DEFAULT);
+    $dbhash = $db->quote($dbhash);
 
+    try{
+      //Check username is unique.
+      $rows = $db->query("SELECT user_id FROM user WHERE username = $dbusername");
+      if($rows->rowCount() > 0){
+        echo '<div class="center">Username is already taken.</div>';
+      } else {
+        $db->exec("INSERT INTO user (username, password, balance, email, name)
+                  VALUES ($dbusername, $dbhash, 0, $dbemail, $dbname)");
+        header('location:login.php');
+      }
+    } catch (PDOException $e){
+      echo '<div class="center">Database error, please try again.</div>';
+    }
   }
 }
 ?>
