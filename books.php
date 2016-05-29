@@ -18,6 +18,7 @@
       </tr>
     </thead>
     <tbody>
+      <?php include 'php/ShowBooks.php'; ?>
       <tr>
         <td><img src="http://www.planwallpaper.com/static/images/ZhGEqAP.jpg" style="width: 100px;"></td>
         <td>Killer Game Programming</td>
