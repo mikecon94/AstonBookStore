@@ -60,10 +60,7 @@ if($_POST['operation'] == 'addbook'){
     echo '<div class="center">Price must be in the format 9.99</div>';
     $errors=true;
   }
-  if(empty($quantity)){
-    echo '<div class="center">Quantity can not be blank.</div>';
-    $errors=true;
-  } else if(!ctype_digit($quantity)){
+  if(!ctype_digit($quantity)){
     echo '<div class="center">Quantity must be a whole number.</div>';
     $errors=true;
   }
