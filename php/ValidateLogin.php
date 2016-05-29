@@ -4,8 +4,6 @@
   The script then connects to the database and attempts to login.
   */
 
-include 'InitDb.php';
-
 $username = htmlspecialchars($_POST['username']);
 $password = $_POST['password'];
 
@@ -28,6 +26,7 @@ if($_POST['operation'] == 'login'){
   }
 
   if(!$errors){
+    include_once 'InitDb.php';
     $dbusername = $db->quote($username);
 
     try{

@@ -9,6 +9,7 @@
         <input type="text" name="title" value="<?php echo $title;?>" placeholder="Title" class="center" size="30">
         <input type="text" name="authors" value="<?php echo $authors;?>" placeholder="Authors" class="center" size="30">
         <input type="text" name="price" value="<?php echo $price;?>" placeholder="Price" class="center" size="30">
+        <input type="text" name="quantity" value="<?php echo $quantity;?>" placeholder="Quantity" class="center" size="30">
         <textarea rows="3" name="description" placeholder="Book Description" class="center" cols="31"><?php echo $description;?></textarea>
         <div class="center">
           Categories:

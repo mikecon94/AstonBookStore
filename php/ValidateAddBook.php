@@ -17,6 +17,10 @@ function checkSelected($checkCategory){
   }
 }
 
+//This prevents users directly POSTing to this script and will redirect
+//them if they aren't logged in or aren't staff.
+include_once 'StaffAccess.php';
+
 //Remove whitespace and dashes from the isbn.
 $isbn = preg_replace('/\s+/','', htmlspecialchars($_POST['isbn']));
 $isbn = preg_replace('/-/' , '', $isbn);
@@ -24,6 +28,7 @@ $title = htmlspecialchars($_POST['title']);
 $authors = htmlspecialchars($_POST['authors']);
 //Remove the pound symbol
 $price = trim(htmlspecialchars($_POST['price']), '£');
+$quantity = htmlspecialchars($_POST['quantity']);
 $description = htmlspecialchars($_POST['description']);
 
 if($_POST['operation'] == 'addbook'){
@@ -55,6 +60,14 @@ if($_POST['operation'] == 'addbook'){
     echo '<div class="center">Price must be in the format 9.99</div>';
     $errors=true;
   }
+  if(empty($quantity)){
+    echo '<div class="center">Quantity can not be blank.</div>';
+    $errors=true;
+  } else if(!ctype_digit($quantity)){
+    echo '<div class="center">Quantity must be a whole number.</div>';
+    $errors=true;
+  }
+
   if(empty($description)){
     echo '<div class="center">Description can not be blank.</div>';
     $errors=true;
@@ -78,5 +91,67 @@ if($_POST['operation'] == 'addbook'){
       $errors=true;
   }
 
+  if(!$errors){
+    include_once 'InitDb.php';
+
+    //Sanitise the inputs before using them on db queries.
+    $dbisbn = $db->quote($isbn);
+    $dbtitle = $db->quote($title);
+    $dbauthors = $db->quote($authors);
+    $dbprice = $db->quote($price);
+    $dbquantity = $db->quote($quantity);
+    $dbdescription = $db->quote($description);
+    $dbimagename = $db->quote($_FILES['image']['name']);
+    $dbimagecontents = $db->quote(file_get_contents($_FILES['image']['tmp_name']));
+
+    try{
+      //Check ISBN is unique
+      $rows = $db->query("SELECT book_id FROM book WHERE book_id = $dbisbn");
+      if($rows->rowCount() > 0){
+        echo '<div class="center">ISBN already exists in catalog.</div>';
+      } else {
+
+        $category_ids = array();
+        $invalid_category = false;
+        //Check the POSTed categories are valid.
+        foreach($_POST['categories'] as $category){
+          $category = $db->quote($category);
+          $rows = $db->query("SELECT category_id FROM category WHERE name = $category");
+          if($rows->rowCount() == 0){
+            echo '<div class="center">' . $category . ' is an invalid category.</div>';
+            $invalid_category = true;
+          } else {
+            //Grab the categorys id and store it... it will be needed when
+            //we insert into the db.
+            $row = $rows->fetch();
+            $category_ids[] = $row['category_id'];
+          }
+        }
+
+        if(!$invalid_category){
+          //Insert into db.
+          $db->exec("INSERT INTO book (book_id, title, authors, quantity, price, description, image, image_name)
+                    VALUES ($dbisbn, $dbtitle, $dbauthors, $dbquantity, $dbprice, $dbdescription, $dbimagecontents, $dbimagename)");
+          //Insert the books categories.
+          foreach($category_ids as $category_id){
+            $db->exec("INSERT INTO book_category (book_id, category_id) VALUES ($dbisbn, '$category_id')");
+          }
+          //Output success message to user and reset the sticky values.
+          echo '<div class="center">Book added to catalog.</div>';
+          $isbn = '';
+          $title = '';
+          $authors = '';
+          $price = '';
+          $quantity = '';
+          $description = '';
+          unset($_POST['categories']);
+        }
+
+      }
+    } catch(PDOException $e){
+      echo '<div class="center">Database error, please try again.</div>';
+      error_log('Database Error: ' . $e);
+    }
+  }
 }
 ?>

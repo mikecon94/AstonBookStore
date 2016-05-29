@@ -4,8 +4,6 @@
   The data is then sent to the database to create a new user.
   */
 
-include 'InitDb.php';
-
 $username = htmlspecialchars($_POST['username']);
 $name = htmlspecialchars($_POST['name']);
 $email = htmlspecialchars($_POST['email']);
@@ -48,6 +46,7 @@ if($_POST['operation'] == 'register'){
   }
 
   if(!$errors){
+    include_once 'InitDb.php';
     //Create new variables that are safe for inserting into the db
     //Old variables aren't reused as they could get output
     //In the sticky form.
