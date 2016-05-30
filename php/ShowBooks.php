@@ -1,8 +1,8 @@
 <?php
-include_once 'CheckLoggedIn.php';
+require_once 'CheckLoggedIn.php';
 
 //Query the database for books.
-include_once  'InitDb.php';
+require_once  'InitDb.php';
 
 try{
   //Check ISBN is unique

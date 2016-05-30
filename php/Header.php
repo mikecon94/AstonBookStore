@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css" href="css/my.css">
 </head>
 <body>
-  <?php include 'php/CheckLoggedIn.php'; ?>
+  <?php require_once 'php/CheckLoggedIn.php'; ?>
 
   <nav class="navbar navbar-default">
     <div class="container-fluid">

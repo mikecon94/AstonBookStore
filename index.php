@@ -1,4 +1,4 @@
-<?php include 'php/Header.php'?>
+<?php require_once 'php/Header.php'?>
   <div class="center">
     <div>
       <h1 >Aston Book Store</h1>

@@ -46,7 +46,7 @@ if($_POST['operation'] == 'register'){
   }
 
   if(!$errors){
-    include_once 'InitDb.php';
+    require_once 'InitDb.php';
     //Create new variables that are safe for inserting into the db
     //Old variables aren't reused as they could get output
     //In the sticky form.

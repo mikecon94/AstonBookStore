@@ -13,7 +13,7 @@
       <h2 class="center">Register</h2>
         <div class="center">
           <div>
-            <?php include 'php/ValidateRegister.php' ?>
+            <?php require_once 'php/ValidateRegister.php' ?>
             <form method="post" action="register.php">
             <input type="text" name="username" value="<?php echo $username;?>" placeholder="Username" autofocus class="center">
             <input type="text" name="name" value="<?php echo $name;?>" placeholder="Full Name" class="center">

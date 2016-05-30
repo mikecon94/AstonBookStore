@@ -26,7 +26,7 @@ if($_POST['operation'] == 'login'){
   }
 
   if(!$errors){
-    include_once 'InitDb.php';
+    require_once 'InitDb.php';
     $dbusername = $db->quote($username);
 
     try{

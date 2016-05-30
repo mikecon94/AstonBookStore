@@ -1,4 +1,4 @@
-<?php include 'php/Header.php'; ?>
+<?php require_once 'php/Header.php'; ?>
 
 
 </body>

@@ -19,7 +19,7 @@ function checkSelected($checkCategory){
 
 //This prevents users directly POSTing to this script and will redirect
 //them if they aren't logged in or aren't staff.
-include_once 'StaffAccess.php';
+require_once 'StaffAccess.php';
 
 //Remove whitespace and dashes from the isbn.
 $isbn = preg_replace('/\s+/','', htmlspecialchars($_POST['isbn']));
@@ -89,7 +89,7 @@ if($_POST['operation'] == 'addbook'){
   }
 
   if(!$errors){
-    include_once 'InitDb.php';
+    require_once 'InitDb.php';
 
     //Sanitise the inputs before using them on db queries.
     $dbisbn = $db->quote($isbn);

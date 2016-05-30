@@ -1,4 +1,4 @@
-<?php include 'php/Header.php'; ?>
+<?php require_once 'php/Header.php'; ?>
 
 <h2 class="center">Books</h2>
 
@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <?php include 'php/ShowBooks.php'; ?>
+      <?php require_once 'php/ShowBooks.php'; ?>
     </tbody>
   </table>
 </div>
