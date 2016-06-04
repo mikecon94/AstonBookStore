@@ -2,7 +2,7 @@
 
 <h2 class="center">Books</h2>
 <form  method="post" action="books.php" class="center">
-  <h3 style="margin-bottom: 40px; margin-right: 10px;">Sort by:</h3> 
+  <h3 style="margin-bottom: 40px; margin-right: 10px;">Sort by:</h3>
   <select name="sort" style="height: 40px;">
     <option value="name" <?php if($_POST['sort'] == "name"){ echo "selected"; }?>>Name</option>
     <option value="authors" <?php if($_POST['sort'] == "authors"){ echo "selected"; }?>>Authors</option>
@@ -25,7 +25,6 @@
         <th>ISBN</th>
         <th>Price</th>
         <th>Stock</th>
-        <th>Add to basket</th>
       </tr>
     </thead>
     <tbody>
