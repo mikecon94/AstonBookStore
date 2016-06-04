@@ -17,7 +17,9 @@
             <option value="Business" class="center" <?php checkSelected('Business'); ?>> Business</option>
             <option value="Computing" class="center" <?php checkSelected('Computing'); ?>>Computing</option>
             <option value="Java" class="center" <?php checkSelected('Java'); ?>>Java</option>
+            <option value="Languages" class="center" <?php  checkSelected('Languages'); ?>>Languages</option>
             <option value="Mathematics" class="center" <?php  checkSelected('Mathematics'); ?>>Mathematics</option>
+            <option value="Multimedia" class="center" <?php  checkSelected('Multimedia'); ?>>Multimedia</option>
             <option value="PHP" class="center" <?php checkSelected('PHP'); ?>>PHP</option>
             <option value="Programming" class="center" <?php checkSelected('Programming'); ?>>Programming</option>
           </select>
