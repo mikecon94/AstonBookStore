@@ -3,10 +3,12 @@
   require_once 'InitDb.php';
 
   $isbn = $db->quote($_GET['isbn']);
+  $userid = $db->quote($_SESSION['id']);
   try{
     $rows = $db->query("SELECT basket_id, book.quantity FROM basket
       INNER JOIN book on basket.book_id = book.book_id
-      WHERE book.book_id = $isbn");
+      WHERE book.book_id = $isbn
+      AND user_id = $userid");
 
     //Check the book is in already in the basket, if not redirect.
     if($rows->rowCount() == 0){
