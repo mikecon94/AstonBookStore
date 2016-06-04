@@ -43,8 +43,9 @@ try{
       <td>£' . $row['price'] . '</td>
       <td>' . $row['quantity'] . '</td>';
 
+    //Add check to see whether it is already in the users basket.
     if($row['quantity'] > 0){
-      echo '<td><button type="button" onclick=\'location.href="#"\' class="btn btn-primary">Add to basket</button></td>';
+      echo '<td><button type="button" onclick=\'location.href="php/ValidateAddBasket.php?isbn=' . $row['book_id'] . '"\' class="btn btn-primary">Add to basket</button></td>';
     } else {
       echo '<td><button type="button" class="btn btn-primary disabled">Out of stock</button></td>';
     }

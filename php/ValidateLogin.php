@@ -32,7 +32,7 @@ if($_POST['operation'] == 'login'){
     try{
       //Retrieve all the users details now as they will be stored
       //in the session variable if the login is successful.
-      $rows = $db->query("SELECT username, password, type, balance, email, name FROM user WHERE username = $dbusername");
+      $rows = $db->query("SELECT user_id, username, password, type, balance, email, name FROM user WHERE username = $dbusername");
       if($rows->rowCount() == 0){
         echo '<div class="center">Username not found.</div>';
       } else {
@@ -42,6 +42,7 @@ if($_POST['operation'] == 'login'){
           //Successfully logged in.
           //Write the session variables and then redirect to index.
           session_start();
+          $_SESSION['id'] = $user['user_id'];
           $_SESSION['username'] = $user['username'];
           $_SESSION['type'] = $user['type'];
           $_SESSION['balance'] = $user['balance'];
