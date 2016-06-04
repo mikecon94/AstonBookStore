@@ -5,9 +5,20 @@ require_once 'CheckLoggedIn.php';
 require_once  'InitDb.php';
 
 try{
-  //Check ISBN is unique
+
+  $sortby = "book.title";
+  if(isset($_POST['sort'])){
+    if( $_POST['sort'] == "authors"){
+      $sortby = "book.authors";
+    } else if($_POST['sort'] == "price"){
+      $sortby = "book.price";
+    } else if ($_POST['sort'] == "isbn"){
+      $sortby = "book.book_id";
+    }
+  }
+
   $rows = $db->query("SELECT book_id, title, authors, quantity, price, description, image
-    FROM book ORDER BY book.title");
+    FROM book ORDER BY $sortby");
   foreach($rows as $row){
     echo '
     <tr>

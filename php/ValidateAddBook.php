@@ -2,10 +2,14 @@
 /*This script validates the data that has been posted in the addbook form.
   It removes any illegal chars and inserts the data into the database.*/
 
+//This prevents users directly POSTing to this script and will redirect
+//them if they aren't logged in or aren't staff.
+require_once 'StaffAccess.php';
+
 //A future improvement could be to have php dynamically insert the categories
 //into the html based on categories in the database.
 
-//Used so the multiselect will "remember" what categories were chosen.
+//Used so the multiselect will remain a sticky form.
 function checkSelected($checkCategory){
   if(isset($_POST['categories'])){
     foreach ($_POST['categories'] as $category){
@@ -16,10 +20,6 @@ function checkSelected($checkCategory){
     }
   }
 }
-
-//This prevents users directly POSTing to this script and will redirect
-//them if they aren't logged in or aren't staff.
-require_once 'StaffAccess.php';
 
 //Remove whitespace and dashes from the isbn.
 $isbn = preg_replace('/\s+/','', htmlspecialchars($_POST['isbn']));
