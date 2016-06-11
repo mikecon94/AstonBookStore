@@ -4,7 +4,7 @@
 
   //$success is set in the search user funcion, if this is true then the user
   //has been found and we can display the basket.
-  if($success){
+  if($userfound){
 
     try{
 

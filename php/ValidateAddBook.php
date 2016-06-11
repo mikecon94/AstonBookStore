@@ -53,15 +53,15 @@ if($_POST['operation'] == 'addbook'){
     echo '<div class="center">Authors can not be blank.</div>';
     $errors=true;
   }
-  if(empty($price)){
-    echo '<div class="center">Price can not be blank.</div>';
+  if(empty($price) || $price == 0){
+    echo '<div class="center">Price can not be blank or 0.</div>';
     $errors=true;
   } else if(!preg_match('/^[0-9]+(.[0-9]+)?$/', $price)){
     echo '<div class="center">Price must be in the format 9.99</div>';
     $errors=true;
   }
   if(!ctype_digit($quantity)){
-    echo '<div class="center">Quantity must be a whole number.</div>';
+    echo '<div class="center">Quantity must be a whole number greater than 0.</div>';
     $errors=true;
   }
 
@@ -76,7 +76,7 @@ if($_POST['operation'] == 'addbook'){
 
   /*Check the file type is that of an image (jpeg or png)
     Also check the file extension is that of an image.
-    This prevents malicious users uploading malicious files.*/
+    This helps prevent malicious users uploading "dodgy" files.*/
   $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
   if(!is_uploaded_file($_FILES['image']['tmp_name'])){
     echo '<div class="center">Please upload an image.</div>';

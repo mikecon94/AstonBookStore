@@ -45,9 +45,9 @@ try{
         $total += $row['price'];
         echo '</td> <td>£' . $row['price'] . '</td>';
         echo '<td><button type="button" onclick=\'location.href="php/RemoveFromBasket.php?isbn=' . $row['book_id'] . '"\' class="btn btn-primary">Remove</button></td>';
-        echo '</tr></tbody><table></div>';
+        echo '</tr>';
     }
-    echo '<div class="center">Total: £' . $total . '</div>';
+    echo '<div class="center">Total: £' . $total . '</div></tbody></table></div>';
   } else {
     echo "Basket is empty.";
   }
