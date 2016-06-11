@@ -25,10 +25,9 @@
           //Only show the following if the user is staff.
           if($_SESSION['type'] == 'Staff'){?>
             <li <?php if(strpos($_SERVER['REQUEST_URI'], "addbook.php") !== false){echo 'class="active"';} ?>><a href="addbook.php">Add Book</a></li>
-            <li <?php if(strpos($_SERVER['REQUEST_URI'], "topup.php") !== false){echo 'class="active"';} ?>><a href="topup.php">Top Up Users</a></li>
             <li <?php if(strpos($_SERVER['REQUEST_URI'], "purchase.php") !== false){echo 'class="active"';} ?>><a href="purchase.php">Complete Purchase</a></li>
-        <?php }
-         ?>
+            <li <?php if(strpos($_SERVER['REQUEST_URI'], "topup.php") !== false){echo 'class="active"';} ?>><a href="topup.php">Top Up Users</a></li>
+        <?php } ?>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span><?php echo $_SESSION['username'] . ' '; include 'php/ShowBalance.php';?></a></li>
