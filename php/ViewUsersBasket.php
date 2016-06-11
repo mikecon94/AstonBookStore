@@ -26,7 +26,7 @@
       //If the operation is purchase then we need to complete the purchase.
       if($_GET['operation'] == 'purchase'){
         //Check the user has enough balance
-        if($balance > $total){
+        if($balance >= $total){
           if($total > 0){
             //Subtract the total from the users balance
             $new_balance = $balance - $total;
