@@ -14,14 +14,15 @@
         <div class="center">
           Categories:
           <select name="categories[]" multiple size="3" style="width: 230px;">
-            <option value="Business" class="center" <?php checkSelected('Business'); ?>> Business</option>
-            <option value="Computing" class="center" <?php checkSelected('Computing'); ?>>Computing</option>
-            <option value="Java" class="center" <?php checkSelected('Java'); ?>>Java</option>
-            <option value="Languages" class="center" <?php  checkSelected('Languages'); ?>>Languages</option>
-            <option value="Mathematics" class="center" <?php  checkSelected('Mathematics'); ?>>Mathematics</option>
-            <option value="Multimedia" class="center" <?php  checkSelected('Multimedia'); ?>>Multimedia</option>
-            <option value="PHP" class="center" <?php checkSelected('PHP'); ?>>PHP</option>
-            <option value="Programming" class="center" <?php checkSelected('Programming'); ?>>Programming</option>
+            <?php
+              //Generate the category options from the db. This makes it easier
+              //to add/remove categories in future.
+              require_once 'php/InitDb.php';
+              $rows = $db->query("SELECT name FROM category ORDER BY name ASC");
+              foreach($rows as $category){
+                echo '<option value="' . $category['name'] . '" class="center" ' . checkSelected($category['name']) . '>' . $category['name'] . '</option>';
+              }
+             ?>
           </select>
         </div>
         <label>Book Image
