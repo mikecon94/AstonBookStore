@@ -45,11 +45,14 @@ try{
     if($row['quantity'] > 0){
       //TODO: Add a check to see if the user already has the book in their basket.
       //      If so then grey out the button.
-
       echo '<td><button type="button" onclick=\'location.href="php/ValidateAddBasket.php?isbn=' . $row['book_id'] . '"\' class="btn btn-primary">Add to basket</button></td>';
     } else {
       echo '<td><button type="button" class="btn btn-primary disabled">Out of stock</button></td>';
     }
+    if($_SESSION['type'] == 'Staff'){
+      echo '<td><button type="button" onclick=\'location.href="addstock.php?isbn=' . $row['book_id'] . '"\' class="btn btn-primary">Increase Stock</button></td>';
+    }
+
     echo '</tr>';
   }
 } catch (PDOException $e){
