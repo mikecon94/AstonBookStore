@@ -37,7 +37,6 @@
       <?php require_once 'php/ShowBooks.php'; ?>
     </tbody>
   </table>
-
 </div>
 
 </div>
