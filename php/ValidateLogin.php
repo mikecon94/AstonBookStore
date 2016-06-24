@@ -4,25 +4,32 @@
   The script then connects to the database and attempts to login.
   */
 
-$username = htmlspecialchars($_POST['username']);
-$password = $_POST['password'];
+//These get set off the posted variables after checking whether
+//They are empty or not. This helps reduce PHP warnings.
+$username = '';
+$password = '';
 
 //Check whether the login form has been submitted.
 //This prevents us showing validation errors when a user
 //first visits the login page.
-if($_POST['operation'] == 'login'){
+if(isset($_POST['operation']) && $_POST['operation'] == 'login'){
 
   //Track if there are validation errors. If so don't attempt to login.
   $errors = false;
 
-  if(empty($username)){
+  if(empty($_POST['username'])){
     echo '<div class="center">Username can not be blank.</div>';
     $errors=true;
+  } else {
+    $username = htmlspecialchars($_POST['username']);
   }
 
-  if(empty($password)){
+  if(empty($_POST['password'])){
     echo '<div class="center">Password can not be blank.</div>';
     $errors=true;
+  } else {
+    //We don't need htmlspecialchars as this isn't a sticky value.
+    $password = $_POST['password'];
   }
 
   if(!$errors){

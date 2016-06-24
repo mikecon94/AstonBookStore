@@ -13,7 +13,7 @@ $password2 = htmlspecialchars($_POST['password2']);
 /*Check if there has been a post to the register page.
   We don't want to show errors when the user first clicks
   register.*/
-if($_POST['operation'] == 'register'){
+if(isset($_POST['operation']) && $_POST['operation'] == 'register'){
 
   //If this is true at the end then we don't attempt to insert the users data.
   $errors = false;
