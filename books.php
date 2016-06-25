@@ -1,4 +1,6 @@
 <?php
+  /*This page displays all the books in the catalog. It allows the user to choose
+    how the books are sorted eg. by title or authors. */
   require_once 'php/Header.php';
   $sort = 'name';
   if(isset($_POST['sort'])){

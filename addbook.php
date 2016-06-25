@@ -1,9 +1,13 @@
-<?php require_once 'php/Header.php'; ?>
-<?php require_once 'php/StaffAccess.php' ?>
+<?php
+  /*This page displays the form to allow a staff member to add a new book into
+    the catalog of books. */
+  require_once 'php/Header.php';
+  require_once 'php/StaffAccess.php';
+?>
 <h2 class="center">Add A New Book To The Store</h2>
   <div class="center">
     <div>
-      <?php require_once 'php/ValidateAddBook.php'?>
+      <?php require_once 'php/ValidateAddBook.php'; ?>
       <form method="post" action="addbook.php" enctype="multipart/form-data">
         <input type="text" name="isbn" value="<?php echo $isbn;?>" placeholder="ISBN" autofocus class="center" size="30">
         <input type="text" name="title" value="<?php echo $title;?>" placeholder="Title" class="center" size="30">
@@ -18,9 +22,14 @@
               //Generate the category options from the db. This makes it easier
               //to add/remove categories in future.
               require_once 'php/InitDb.php';
-              $rows = $db->query("SELECT name FROM category ORDER BY name ASC");
-              foreach($rows as $category){
-                echo '<option value="' . $category['name'] . '" class="center" ' . checkSelected($category['name']) . '>' . $category['name'] . '</option>';
+              try{
+                $rows = $db->query("SELECT name FROM category ORDER BY name ASC");
+                foreach($rows as $category){
+                  echo '<option value="' . $category['name'] . '" class="center" ' . checkSelected($category['name']) . '>' . $category['name'] . '</option>';
+                }
+              } catch(PDOException $e){
+                echo '<div class="center">Database error, please try again.</div>';
+                error_log('Database Error: ' . $e);
               }
              ?>
           </select>

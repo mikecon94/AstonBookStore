@@ -1,15 +1,18 @@
 <?php
+  /*This script is used by the purchase.php page. The variable $userid is set
+    earlier in the page and used in this script to grab the users basket contents
+    and displays them in a table. */
+
   require_once 'StaffAccess.php';
   require_once 'InitDb.php';
 
-  //$success is set in the search user funcion, if this is true then the user
+  //This variable is set in the search user funcion, if this is true then the user
   //has been found and we can display the basket.
   if($userfound){
 
     try{
-
       $userid = $db->quote($userid);
-
+      //Grab all the books from the chosen users basket.
       $rows=$db->query("SELECT SUM(book.price) AS total FROM book
                 INNER JOIN basket ON book.book_id = basket.book_id
                 WHERE user_id = $userid");
@@ -44,22 +47,27 @@
       }
       echo '</div>';
       if($purchase_success){
+        //The basket total will be 0 as the purchase was completed.
         $total = '0.00';
         echo '<div class="center">Basket Total: £' . $total . '</div>';
         echo '<div class="center">Users Balance: £' . $new_balance . '</div>';
         echo '<div class="center">';
         echo 'Purchase was successful.';
       } else if($balance < $total){
+        //The balance isn't enough to cover the transaction so we display
+        //a disabled button informing the user.
         echo '<div class="center">Basket Total: £' . $total . '</div>';
         echo '<div class="center">Users Balance: £' . $new_balance . '</div>';
         echo '<div class="center">';
         echo '<button type="button" style="margin-bottom: 10px;" class="btn btn-primary disabled">Balance Not Enough</button>';
       } else if($total == 0){
+        //The basket is empty.
         echo '<div class="center">Basket Total: £0.00</div>';
         echo '<div class="center">Users Balance: £' . $new_balance . '</div>';
         echo '<div class="center">';
         echo '<button type="button" style="margin-bottom: 10px;" class="btn btn-primary disabled">Basket Is Empty</button>';
       } else{
+        //Give the user the option to complete the purchase.
         echo '<div class="center">Basket Total: £' . $total . '</div>';
         echo '<div class="center">Users Balance: £' . $new_balance . '</div>';
         echo '<div class="center">';
@@ -67,8 +75,9 @@
       }
       echo '</div>';
 
-      //If the purchase_success variable is true then we don't need to show the
-      //table below as it will be empty.
+      //If the total is 0 then it suggests the basket is empty.
+      //This assume no books are free. If it isn't 0 then we display the books
+      //in a table.
       if($total != 0){
         ?>
         <div class="center">

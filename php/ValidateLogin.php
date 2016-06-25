@@ -4,14 +4,12 @@
   The script then connects to the database and attempts to login.
   */
 
-//These get set off the posted variables after checking whether
-//They are empty or not. This helps reduce PHP warnings.
+//These are used as sticky form values. They are set during the validation checks.
 $username = '';
 $password = '';
 
 //Check whether the login form has been submitted.
-//This prevents us showing validation errors when a user
-//first visits the login page.
+//This prevents us showing validation errors when a user first visits the login page.
 if(isset($_POST['operation']) && $_POST['operation'] == 'login'){
 
   //Track if there are validation errors. If so don't attempt to login.
@@ -34,6 +32,8 @@ if(isset($_POST['operation']) && $_POST['operation'] == 'login'){
 
   if(!$errors){
     require_once 'InitDb.php';
+
+    //Sanitise the user input for the db query to protect against SQL injection.
     $dbusername = $db->quote($username);
 
     try{

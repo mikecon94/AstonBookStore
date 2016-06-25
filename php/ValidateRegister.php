@@ -10,29 +10,26 @@ $email = htmlspecialchars($_POST['email']);
 $password = htmlspecialchars($_POST['password']);
 $password2 = htmlspecialchars($_POST['password2']);
 
-/*Check if there has been a post to the register page.
-  We don't want to show errors when the user first clicks
-  register.*/
+//Check if there has been a post to the register page.
+//We don't want to show errors when the user first clicks register.
 if(isset($_POST['operation']) && $_POST['operation'] == 'register'){
 
-  //If this is true at the end then we don't attempt to insert the users data.
+  //Tracks validation errors and doesn't submit to db if there are any.
   $errors = false;
-  //Basic validation eg. empty etc.
-  //Check username is unique.
+
   if(empty($username)){
     echo '<div class="center">Username can not be blank.</div>';
     $errors=true;
   }
-
   if(empty($name)){
     echo '<div class="center">Name can not be blank.</div>';
     $errors=true;
   }
-
   if(empty($email)){
     echo '<div class="center">Email can not be blank.</div>';
     $errors=true;
   } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    //This is the method suggested on PHPs docs for validating an email.
     echo '<div class="center">Invalid email entered.</div>';
     $errors=true;
   }
@@ -48,11 +45,10 @@ if(isset($_POST['operation']) && $_POST['operation'] == 'register'){
   if(!$errors){
     require_once 'InitDb.php';
     //Create new variables that are safe for inserting into the db
-    //Old variables aren't reused as they could get output
-    //In the sticky form.
     $dbusername = $db->quote($username);
     $dbname = $db->quote($name);
     $dbemail = $db->quote($email);
+    //Hash the password before inserting into the db.
     $dbhash = password_hash($password, PASSWORD_DEFAULT);
     $dbhash = $db->quote($dbhash);
 

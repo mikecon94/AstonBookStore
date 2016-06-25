@@ -1,5 +1,7 @@
-<?php require_once 'php/Header.php'; ?>
-<?php require_once 'php/StaffAccess.php' ?>
+<?php
+  require_once 'php/Header.php';
+  require_once 'php/StaffAccess.php';
+?>
 
 <h2 class="center">Top Up a User</h2>
 <div class="center">

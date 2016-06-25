@@ -1,3 +1,12 @@
+<?php
+/*This page is required on every page after login. It displays the navbar,
+  the username of the person logged in, their balance and a link to logout.
+  Further below, we use the url of the page to determine which page in the
+  navbar should be highlighted as the current page. */
+
+require_once 'php/CheckLoggedIn.php';
+?>
+
 <html>
 <head>
   <title> Aston Book Store</title>
@@ -13,8 +22,6 @@
   <link rel="stylesheet" type="text/css" href="css/my.css">
 </head>
 <body>
-  <?php require_once 'php/CheckLoggedIn.php'; ?>
-
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <ul class="nav navbar-nav">

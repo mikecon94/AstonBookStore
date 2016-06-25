@@ -1,4 +1,7 @@
-<?php require_once 'php/Header.php'; ?>
+<?php
+  /*This page displays the users basket. */
+  require_once 'php/Header.php';
+?>
 
 <h2 class="center">Basket</h2>
 
